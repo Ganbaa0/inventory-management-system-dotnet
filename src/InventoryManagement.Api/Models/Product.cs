@@ -16,6 +16,7 @@ public class Product
     public int QuantityInStock { get; set; }
 
     public int ReorderLevel { get; set; }
+    public bool IsActive { get; set; } = true;
 
     public int CategoryId { get; set; }
     public Category? Category { get; set; }
