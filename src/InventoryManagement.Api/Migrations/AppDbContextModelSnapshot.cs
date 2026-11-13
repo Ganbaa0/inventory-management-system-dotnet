@@ -15,7 +15,7 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
     // If you encounter a merge conflict in the line below, it means you need to
     // discard one of the migration branches and recreate its migrations on top of
     // the other branch. See https://aka.ms/efcore-docs-migrations-conflicts for more info.
-    public override string LastMigrationId => "20261112081245_ConfigureProductRules";
+    public override string LastMigrationId => "20261113032154_SeedSuppliersAndProducts";
 
     protected override void BuildModel(ModelBuilder modelBuilder)
     {
@@ -44,6 +44,26 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.HasKey("Id");
 
                 b.ToTable("Categories");
+
+                b.HasData(
+                    new
+                    {
+                        Id = 1,
+                        Description = "Electronic devices and gadgets",
+                        Name = "Electronics"
+                    },
+                    new
+                    {
+                        Id = 2,
+                        Description = "Apparel and clothing items",
+                        Name = "Clothing"
+                    },
+                    new
+                    {
+                        Id = 3,
+                        Description = "Books and literature",
+                        Name = "Books"
+                    });
             });
 
         modelBuilder.Entity("InventoryManagement.Api.Models.Product", b =>
@@ -91,6 +111,47 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.HasIndex("SupplierId");
 
                 b.ToTable("Products");
+
+                b.HasData(
+                    new
+                    {
+                        Id = 1,
+                        CategoryId = 1,
+                        Description = "A high-end smartphone with advanced features.",
+                        IsActive = true,
+                        Name = "Smartphone",
+                        Price = 699.99m,
+                        QuantityInStock = 50,
+                        ReorderLevel = 10,
+                        Sku = "ELEC001",
+                        SupplierId = 1
+                    },
+                    new
+                    {
+                        Id = 2,
+                        CategoryId = 2,
+                        Description = "A comfortable cotton t-shirt.",
+                        IsActive = true,
+                        Name = "T-Shirt",
+                        Price = 19.99m,
+                        QuantityInStock = 100,
+                        ReorderLevel = 20,
+                        Sku = "CLOTH001",
+                        SupplierId = 1
+                    },
+                    new
+                    {
+                        Id = 3,
+                        CategoryId = 3,
+                        Description = "A captivating fiction novel.",
+                        IsActive = true,
+                        Name = "Novel",
+                        Price = 14.99m,
+                        QuantityInStock = 30,
+                        ReorderLevel = 5,
+                        Sku = "BOOK001",
+                        SupplierId = 1
+                    });
             });
 
         modelBuilder.Entity("InventoryManagement.Api.Models.Supplier", b =>
@@ -120,6 +181,16 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
                 b.HasKey("Id");
 
                 b.ToTable("Suppliers");
+
+                b.HasData(
+                    new
+                    {
+                        Id = 1,
+                        ContactPerson = "John Doe",
+                        Email = "johndoe@example.com",
+                        Name = "Supplier A",
+                        Phone = "123-456-7890"
+                    });
             });
 
         modelBuilder.Entity("InventoryManagement.Api.Models.Product", b =>
