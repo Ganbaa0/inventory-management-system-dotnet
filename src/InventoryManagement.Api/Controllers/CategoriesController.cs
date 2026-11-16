@@ -39,6 +39,39 @@ public class CategoriesController : ControllerBase
             })
             .ToListAsync();
     }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<CategoryDto>> GetCategory(int id)
+    {
+        var category = await _context.Categories
+            .Where(c => c.Id == id)
+            .Select(c => new CategoryDto
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
+                Products = c.Products
+                    .Select(p => new ProductSummaryDto
+                    {
+                        Id = p.Id,
+                        Sku = p.Sku,
+                        Name = p.Name,
+                        Price = p.Price,
+                        QuantityInStock = p.QuantityInStock,
+                        IsActive = p.IsActive
+                    })
+                    .ToList()
+            })
+            .FirstOrDefaultAsync();
+
+        if (category == null)
+        {
+            return NotFound();
+        }
+
+        return category;
+    }
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCategory(int id)
     {
