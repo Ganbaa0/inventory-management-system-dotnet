@@ -39,4 +39,27 @@ public class CategoriesController : ControllerBase
             })
             .ToListAsync();
     }
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteCategory(int id)
+    {
+        var category = await _context.Categories.FindAsync(id);
+
+        if (category == null)
+        {
+            return NotFound();
+        }
+
+        _context.Categories.Remove(category);
+
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateException)
+        {
+            return Conflict(new { message = "Энэ ангилалд бараа холбогдсон байгаа тул устгах боломжгүй." });
+        }
+
+        return NoContent();
+    }
 }

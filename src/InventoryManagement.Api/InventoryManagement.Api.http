@@ -4,8 +4,4 @@ GET {{InventoryManagement.Api_HostAddress}}/openapi/v1.json
 Accept: application/json
 
 ###
-
-GET {{InventoryManagement.Api_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
+DELETE https://localhost:7252/api/categories/999
