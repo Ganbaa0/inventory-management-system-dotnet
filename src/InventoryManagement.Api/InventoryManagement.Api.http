@@ -4,10 +4,13 @@ GET {{InventoryManagement.Api_HostAddress}}/openapi/v1.json
 Accept: application/json
 
 ###
-POST https://localhost:7252/api/categories
-Content-Type: application/json
+# POST https://localhost:7252/api/categories
+# Content-Type: application/json
 
-{
-  "name": "Sports",
-  "description": "Sports equipment"
-}
+# {
+#   "name": "Sports",
+#   "description": "Sports equipment"
+# }
+
+###
+DELETE https://localhost:7252/api/categories/4
