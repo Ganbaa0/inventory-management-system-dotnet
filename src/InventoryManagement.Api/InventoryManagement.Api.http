@@ -4,13 +4,49 @@ GET {{InventoryManagement.Api_HostAddress}}/openapi/v1.json
 Accept: application/json
 
 ###
-# POST https://localhost:7252/api/categories
-# Content-Type: application/json
-
-# {
-#   "name": "Sports",
-#   "description": "Sports equipment"
-# }
+DELETE https://localhost:7252/api/products/5
 
 ###
-DELETE https://localhost:7252/api/categories/4
+POST https://localhost:7252/api/products
+Content-Type: application/json
+
+{
+  "sku": "ELEC002",
+  "name": "Laptop",
+  "price": 1299.99,
+  "quantityInStock": 10,
+  "reorderLevel": 2,
+  "categoryId": 1,
+  "supplierId": 1
+}
+
+###
+POST https://localhost:7252/api/products
+Content-Type: application/json
+
+{
+  "sku": "ELEC003",
+  "name": "Tablet",
+  "price": 499.99,
+  "quantityInStock": 5,
+  "reorderLevel": 1,
+  "categoryId": 1,
+  "supplierId": 1
+}
+
+###
+PUT https://localhost:7252/api/products/4
+Content-Type: application/json
+
+{
+  "sku": "ELEC002",
+  "name": "Laptop Pro",
+  "price": 1499.99,
+  "quantityInStock": 8,
+  "reorderLevel": 2,
+  "categoryId": 1,
+  "supplierId": 1
+}
+
+###
+DELETE https://localhost:7252/api/suppliers/1

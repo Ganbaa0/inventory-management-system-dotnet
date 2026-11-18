@@ -95,6 +95,24 @@ public class CategoriesController : ControllerBase
         return CreatedAtAction(nameof(GetCategory), new { id = category.Id }, result);
     }
 
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateCategory(int id, CategoryCreateDto dto)
+    {
+        var category = await _context.Categories.FindAsync(id);
+
+        if (category == null)
+        {
+            return NotFound();
+        }
+
+        category.Name = dto.Name;
+        category.Description = dto.Description;
+
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCategory(int id)
     {

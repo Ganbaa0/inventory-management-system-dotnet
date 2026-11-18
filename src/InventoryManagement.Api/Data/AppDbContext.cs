@@ -34,6 +34,10 @@ public class AppDbContext : DbContext
             .Property(p => p.Price)
             .HasPrecision(18, 2);
 
+        modelBuilder.Entity<Product>()
+            .HasIndex(p => p.Sku)
+            .IsUnique();
+
         modelBuilder.Entity<Category>().HasData(
             new Category { Id = 1, Name = "Electronics", Description = "Electronic devices and gadgets" },
             new Category { Id = 2, Name = "Clothing", Description = "Apparel and clothing items" },
