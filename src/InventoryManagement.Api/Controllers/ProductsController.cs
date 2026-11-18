@@ -37,4 +37,34 @@ public class ProductsController : ControllerBase
             })
             .ToListAsync();
     }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<ProductDto>> GetProduct(int id)
+    {
+        var product = await _context.Products
+            .Where(p => p.Id == id)
+            .Select(p => new ProductDto
+            {
+                Id = p.Id,
+                Sku = p.Sku,
+                Name = p.Name,
+                Description = p.Description,
+                Price = p.Price,
+                QuantityInStock = p.QuantityInStock,
+                ReorderLevel = p.ReorderLevel,
+                IsActive = p.IsActive,
+                CategoryId = p.CategoryId,
+                CategoryName = p.Category!.Name,
+                SupplierId = p.SupplierId,
+                SupplierName = p.Supplier!.Name
+            })
+            .FirstOrDefaultAsync();
+
+        if (product == null)
+        {
+            return NotFound();
+        }
+
+        return product;
+    }
 }
