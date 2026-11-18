@@ -1,5 +1,6 @@
 ﻿using InventoryManagement.Api.Data;
 using InventoryManagement.Api.DTOs;
+using InventoryManagement.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -70,6 +71,28 @@ public class CategoriesController : ControllerBase
         }
 
         return category;
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<CategoryDto>> CreateCategory(CategoryCreateDto dto)
+    {
+        var category = new Category
+        {
+            Name = dto.Name,
+            Description = dto.Description
+        };
+
+        _context.Categories.Add(category);
+        await _context.SaveChangesAsync();
+
+        var result = new CategoryDto
+        {
+            Id = category.Id,
+            Name = category.Name,
+            Description = category.Description
+        };
+
+        return CreatedAtAction(nameof(GetCategory), new { id = category.Id }, result);
     }
 
     [HttpDelete("{id}")]
